@@ -15,7 +15,6 @@ bot = commands.Bot(command_prefix="f!")
 @bot.event
 async def on_ready():
     loop1.start()
-    
     print("Bot is online.")
 
 @bot.event
