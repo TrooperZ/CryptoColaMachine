@@ -75,7 +75,7 @@ async def on_command_error(ctx, error):
         await ctx.send(f"If you would like to have a reminder when it's time to claim, visit the $store and purchase the Faucet Ping role.")
         return
 
-@tasks.loop(hours=2)
+@tasks.loop(minutes=120)
 async def loop1():
     await bot.wait_until_ready()
     dur = randint(60, 240)

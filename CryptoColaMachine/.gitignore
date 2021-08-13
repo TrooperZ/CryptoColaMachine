@@ -1,0 +1,6 @@
+*.env
+.env
+.pyproj
+*.pyproj
+.sln
+*.sln
