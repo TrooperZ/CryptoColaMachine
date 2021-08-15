@@ -83,7 +83,7 @@ async def on_command_error(ctx, error):
 async def loop1():
     await bot.wait_until_ready()
 
-    data = configs.find({server: 857763612361490482, "type": "activeloyalconf"})
+    data = configs.find({"server": 857763612361490482, "type": "activeloyalconf"})
     for x in data:
         dur = randint(x["time1"], x["time2"])
         amt = randint(x["amt1"], x["amt2"])
@@ -185,7 +185,7 @@ async def say(ctx, *, message):
 @bot.command(name='activeloyalconf')
 @commands.has_guild_permissions(manage_guild=True)
 async def activeloyalconf(ctx, time1, time2, amt1, amt2):
-    configs.insert_one({server: ctx.guild.id, "type": "activeloyalconf", "time1": time1, "time2": time2, "amt1": amt1, "amt2": amt2})
+    configs.insert_one({"server": ctx.guild.id, "type": "activeloyalconf", "time1": time1, "time2": time2, "amt1": amt1, "amt2": amt2})
     await ctx.send("Configuration set.")
 
 bot.run(os.getenv("DISCORD_TOKEN"))
