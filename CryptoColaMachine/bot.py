@@ -7,8 +7,13 @@ from random import randint, shuffle
 from discord.ext import commands
 from discord.ext import tasks
 import aiohttp
+import pymongo
 
 load_dotenv()
+
+mongoclient = pymongo.MongoClient(os.getenv("MONGODB"))
+mongodb = mongoclient["data"]
+configs = mongodb["configs"]
 
 bot = commands.Bot(command_prefix="f!")
 
@@ -77,8 +82,11 @@ async def on_command_error(ctx, error):
 @tasks.loop(minutes=120)
 async def loop1():
     await bot.wait_until_ready()
-    dur = randint(60, 240)
-    amt = randint(2, 5)
+
+    data = configs.find({"type": "activeloyalconf"})
+    for x in data:
+        dur = randint(x["time1"], x["time2"])
+        amt = randint(x["amt1"], x["amt2"])
 
     channel = bot.get_channel(857808852258783293)
     await channel.send(f"$tip active {amt} colas each")
@@ -149,29 +157,35 @@ async def claim(ctx, coin):
         await ctx.send(f"{ctx.author.mention} time to claim!")
 
 @bot.command(name='bals')
-async def claim(ctx, coin="none"):
+async def bals(ctx, coin="none"):
     await ctx.send("$bals top noembed")
 
 @bot.command(name='balances')
-async def claim(ctx, coin="none"):
+async def balances(ctx, coin="none"):
     await ctx.send("$bals top noembed")
 
 @bot.command(name='bal')
-async def claim(ctx, coin="none"):
+async def bal(ctx, coin="none"):
     if coin != "none":
         return await ctx.send(f"$bal {coin}")
     await ctx.send("You need to include a cryptocurrency code (BTC, ETH, etc.).")
 
 @bot.command(name='balance')
-async def claim(ctx, coin="none"):
+async def balance(ctx, coin="none"):
     if coin != "none":
         return await ctx.send(f"$bal {coin}")
     await ctx.send("You need to include a cryptocurrency code (BTC, ETH, etc.).")
 
 @bot.command(name='say')
-async def claim(ctx, *, message):
+async def say(ctx, *, message):
     if ctx.author.id not in [390841378277425153, 514396597287911425]:
         return await ctx.send("You are not authorized to use this command.")
     await ctx.send(message)
+
+@bot.command(name='activeloyalconf')
+@commands.has_guild_permissions(manage_guild=True)
+async def activeloyalconf(ctx, *, time1, time2, amt1, amt2):
+    configs.insert_one({"type": "activeloyalconf", "time1": time1, "time2": time2, "amt1": amt1, "amt2": amt2})
+    await ctx.send("Configuration set.")
 
 bot.run(os.getenv("DISCORD_TOKEN"))
