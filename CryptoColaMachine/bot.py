@@ -184,7 +184,7 @@ async def say(ctx, *, message):
 
 @bot.command(name='activeloyalconf')
 @commands.has_guild_permissions(manage_guild=True)
-async def activeloyalconf(ctx, *, time1, time2, amt1, amt2):
+async def activeloyalconf(ctx, time1, time2, amt1, amt2):
     configs.insert_one({"type": "activeloyalconf", "time1": time1, "time2": time2, "amt1": amt1, "amt2": amt2})
     await ctx.send("Configuration set.")
 
