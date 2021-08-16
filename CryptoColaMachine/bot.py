@@ -85,8 +85,8 @@ async def loop1():
 
     data = configs.find({"$and": [{"server": 857763612361490482, "type": "activeloyalconf"}]})
     for x in data:
-        dur = randint(x["time1"], x["time2"])
-        amt = randint(x["amt1"], x["amt2"])
+        dur = randint(int(x["time1"]), int(x["time2"]))
+        amt = randint(int(x["amt1"]), int(x["amt2"]))
 
     channel = bot.get_channel(857808852258783293)
     await channel.send(f"$tip active {amt} colas each")
