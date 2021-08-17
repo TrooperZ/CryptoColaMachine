@@ -102,7 +102,6 @@ async def hodl(ctx):
         return await ctx.send("Unauthorized usage.")
     server = bot.get_guild(857763612361490482)
 
-    five00list = []
     oneklist = []
     fiveklist = []
     tenklist = []
@@ -115,15 +114,17 @@ async def hodl(ctx):
     for member in server.members:
         if noreward in member.roles:
             continue
-        elif onek in member.roles:
-            oneklist.append(member.mention)
+        elif tenk in member.roles:
+            tenklist.append(member.mention)
             continue
         elif fivek in member.roles:
             fiveklist.append(member.mention)
             continue
-        elif tenk in member.roles:
-            tenklist.append(member.mention)
+        elif onek in member.roles:
+            oneklist.append(member.mention)
             continue
+
+
 
     channel = bot.get_channel(857807635432341504)
     capPrice = 0.0125
@@ -143,7 +144,6 @@ async def hodlloop():
         return
     server = bot.get_guild(857763612361490482)
 
-    five00list = []
     oneklist = []
     fiveklist = []
     tenklist = []
@@ -156,14 +156,14 @@ async def hodlloop():
     for member in server.members:
         if noreward in member.roles:
             continue
-        elif onek in member.roles:
-            oneklist.append(member.mention)
+        elif tenk in member.roles:
+            tenklist.append(member.mention)
             continue
         elif fivek in member.roles:
             fiveklist.append(member.mention)
             continue
-        elif tenk in member.roles:
-            tenklist.append(member.mention)
+        elif onek in member.roles:
+            oneklist.append(member.mention)
             continue
 
     channel = bot.get_channel(857807635432341504)
