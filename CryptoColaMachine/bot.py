@@ -10,6 +10,7 @@ import aiohttp
 import pymongo
 import datetime
 from time import gmtime, strftime
+from web3 import Web3
 load_dotenv()
 
 mongoclient = pymongo.MongoClient(os.getenv("MONGODB"))
@@ -22,6 +23,7 @@ bot = commands.Bot(command_prefix="f!", intents=discord.Intents.all())
 async def on_ready():
     hodlloop.start()
     loop1.start()
+    priceloop.start()
     print("Bot is online.")
 
 @bot.event
@@ -81,6 +83,75 @@ async def on_command_error(ctx, error):
         await ctx.send(f"If you would like to have a reminder when it's time to claim, visit the $store and purchase the Faucet Ping role.")
         return
 
+@tasks.loop(hours=2)
+async def priceloop():
+    await bot.wait_until_ready()
+    tokenABI = [
+    {
+        "constant":True,
+        "inputs":[{"name":"_owner","type":"address"}],
+        "name":"balanceOf",
+        "outputs":[{"name":"balance","type":"uint256"}],
+        "type":"function"
+    },
+    {
+        "constant":True,
+        "inputs":[
+            
+        ],
+        "name":"totalSupply",
+        "outputs":[
+            {
+                "name":"",
+                "type":"uint256"
+            }
+        ],
+        "payable":False,
+        "stateMutability":"view",
+        "type":"function"
+   },
+        {
+        "constant":True,
+        "inputs":[
+            {
+                "name":"",
+                "type":"address"
+            },
+            {
+                "name":"",
+                "type":"address"
+            }
+        ],
+        "name":"allowance",
+        "outputs":[
+            {
+                "name":"",
+                "type":"uint256"
+            }
+        ],
+        "payable":False,
+        "stateMutability":"view",
+        "type":"function"
+    }
+]
+    pool = Web3.toChecksumAddress("0x27dfd3d2b9bd25f8419ee77535d8a1a956b67d0c")
+    capAddr = Web3.toChecksumAddress("0x2e1525c67bb5b001bce02ee88432f387b926d5bf")
+    bnbAddr = Web3.toChecksumAddress("0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c") #wbnb
+    w3 = Web3(Web3.HTTPProvider('https://bsc-dataseed1.binance.org:443'))
+    cap = w3.eth.contract(abi=tokenABI, address=capAddr)
+    bnb = w3.eth.contract(abi=tokenABI, address=bnbAddr)
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd") as response:
+            data1 = await response.json()
+            bnbprice = data1["binancecoin"]["usd"]
+
+    capbal = cap.functions.balanceOf(pool).call()
+    bnbbal = bnb.functions.balanceOf(pool).call()
+    price = (bnbbal / 1e18) / (capbal / 1e18) * bnbprice
+    channel = bot.get_channel(877254173148717067)
+    await channel.edit(name=f"$ {round(price, 5)} CAP")
+    return price
+
 @tasks.loop(minutes=120)
 async def loop1():
     await bot.wait_until_ready()
@@ -127,7 +198,7 @@ async def hodl(ctx):
 
 
     channel = bot.get_channel(857807635432341504)
-    capPrice = 0.0125
+    capPrice = await priceloop()
     if len(oneklist) != 0:
         await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each {onek.mention}")
     if len(fiveklist) != 0:
@@ -169,7 +240,7 @@ async def hodlloop():
             continue
 
     channel = bot.get_channel(857807635432341504)
-    capPrice = 0.0125
+    capPrice = await priceloop()
     if len(oneklist) != 0:
         await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each {onek.mention}")
     if len(fiveklist) != 0:
@@ -186,8 +257,8 @@ async def claim(ctx, coin):
     if ctx.channel.id not in [864150180169121832, 868183998285885540]:
         return await ctx.send("Go to the faucet channel.")
 
-    if coin.lower() not in ['eth', 'ltc', 'bch', 'wax', 'doge', 'vtc', 'ban', 'xmr', 'nano', 'rvn', 'trx', 'xlm', 'xrp', 'lotto', 'pussy', 'bnb', 'etc', '1mt', 'skill', 'comp', 'dai', 'arteon', 'r0ok', 'shx']:
-        return await ctx.send(f"{ctx.author.mention}, invalid coin choice, check pins for valid coins.")
+    if coin.lower() not in ['eth', 'ltc', 'bch', 'wax', 'doge', 'vtc', 'ban', 'xmr', 'nano', 'rvn', 'trx', 'xlm', 'xrp', 'lotto', 'pussy', 'etc', '1mt', 'skill', 'comp', 'dai', 'arteon', 'r0ok', 'shx']:
+        return await ctx.send(f"{ctx.author.mention}, invalid coin choice, check pins for valid coins. CAP holders earn BNB weekly.")
 
     admin = discord.utils.get(ctx.guild.roles, name="Administration Team")
     team = discord.utils.get(ctx.guild.roles, name="Crypto Cola Team")
