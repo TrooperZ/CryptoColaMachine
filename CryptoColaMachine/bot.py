@@ -97,7 +97,7 @@ async def loop1():
     loop1.change_interval(minutes=dur)
 
 
-@tasks.loop(hours=4)
+@tasks.loop(hours=1)
 async def hodlloop():
     await bot.wait_until_ready()
     if datetime.datetime.today().weekday() != 4:
