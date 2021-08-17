@@ -98,6 +98,8 @@ async def loop1():
 
 @bot.command(name='hodl')
 async def hodl(ctx):
+    if ctx.author.id != 514396597287911425:
+        return await ctx.send("Unauthorized usage.")
     server = bot.get_guild(857763612361490482)
 
     five00list = []
