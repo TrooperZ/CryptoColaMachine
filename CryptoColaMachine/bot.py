@@ -199,12 +199,15 @@ async def hodl(ctx):
 
     channel = bot.get_channel(857807635432341504)
     capPrice = await priceloop()
+    a = capPrice * 1000 * 0.15 / 52
+    b = a = capPrice * 5000 * 0.15 / 52
+    c = a = capPrice * 10000 * 0.15 / 52
     if len(oneklist) != 0:
-        await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each {onek.mention}")
+        await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
     if len(fiveklist) != 0:
-        await channel.send(f"$tip {','.join(fiveklist)} $0.18028846153 bnb each {fivek.mention}")
+        await channel.send(f"$tip {','.join(fiveklist)} ${b} bnb each {fivek.mention}")
     if len(tenklist) != 0:
-        await channel.send(f"$tip {','.join(tenklist)} $0.36057692307 bnb each {tenk.mention}")
+        await channel.send(f"$tip {','.join(tenklist)} ${c} bnb each {tenk.mention}")
     await channel.send(f"**Thank you for HODLing CAP!**")
 
 @tasks.loop(hours=1)
@@ -241,12 +244,15 @@ async def hodlloop():
 
     channel = bot.get_channel(857807635432341504)
     capPrice = await priceloop()
+    a = capPrice * 1000 * 0.15 / 52
+    b = a = capPrice * 5000 * 0.15 / 52
+    c = a = capPrice * 10000 * 0.15 / 52
     if len(oneklist) != 0:
-        await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each {onek.mention}")
+        await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
     if len(fiveklist) != 0:
-        await channel.send(f"$tip {','.join(fiveklist)} $0.18028846153 bnb each {fivek.mention}")
+        await channel.send(f"$tip {','.join(fiveklist)} ${b} bnb each {fivek.mention}")
     if len(tenklist) != 0:
-        await channel.send(f"$tip {','.join(tenklist)} $0.36057692307 bnb each {tenk.mention}")
+        await channel.send(f"$tip {','.join(tenklist)} ${c} bnb each {tenk.mention}")
     
     
     await channel.send(f"**Thank you for HODLing CAP!**")
