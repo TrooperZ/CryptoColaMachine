@@ -128,10 +128,12 @@ async def hodl(ctx):
 
     channel = bot.get_channel(857807635432341504)
     capPrice = 0.0125
-    #await channel.send(f"$tip {','.join(five00list)} $0.01802884615 bnb each **500 CAP Holders**")
-    await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each **1000 CAP Holders**")
-    await channel.send(f"$tip {','.join(fiveklist)} $0.18028846153 bnb each **5000 CAP Holders**")
-    await channel.send(f"$tip {','.join(tenklist)} $0.36057692307 bnb each **10000 CAP Holders**")
+    if len(oneklist) != 0:
+        await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each {onek.mention}")
+    if len(fiveklist) != 0:
+        await channel.send(f"$tip {','.join(fiveklist)} $0.18028846153 bnb each {fivek.mention}")
+    if len(tenklist) != 0:
+        await channel.send(f"$tip {','.join(tenklist)} $0.36057692307 bnb each {tenk.mention}")
     await channel.send(f"**Thank you for HODLing CAP!**")
 
 @tasks.loop(hours=1)
@@ -168,10 +170,14 @@ async def hodlloop():
 
     channel = bot.get_channel(857807635432341504)
     capPrice = 0.0125
-    #await channel.send(f"$tip {','.join(five00list)} $0.01802884615 bnb each **500 CAP Holders**")
-    await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each **1000 CAP Holders**")
-    await channel.send(f"$tip {','.join(fiveklist)} $0.18028846153 bnb each **5000 CAP Holders**")
-    await channel.send(f"$tip {','.join(tenklist)} $0.36057692307 bnb each **10000 CAP Holders**")
+    if len(oneklist) != 0:
+        await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each {onek.mention}")
+    if len(fiveklist) != 0:
+        await channel.send(f"$tip {','.join(fiveklist)} $0.18028846153 bnb each {fivek.mention}")
+    if len(tenklist) != 0:
+        await channel.send(f"$tip {','.join(tenklist)} $0.36057692307 bnb each {tenk.mention}")
+    
+    
     await channel.send(f"**Thank you for HODLing CAP!**")
 
 @bot.command(name='claim')
