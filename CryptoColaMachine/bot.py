@@ -9,7 +9,7 @@ from discord.ext import tasks
 import aiohttp
 import pymongo
 import datetime
-
+from time import gmtime, strftime
 load_dotenv()
 
 mongoclient = pymongo.MongoClient(os.getenv("MONGODB"))
@@ -100,6 +100,9 @@ async def loop1():
 @tasks.loop(hours=1)
 async def hodlloop():
     await bot.wait_until_ready()
+    if strftime("%H:%M:%S", gmtime()) != "12:00:00":
+        return
+
     if datetime.datetime.today().weekday() != 4:
         return
     server = bot.get_guild(857763612361490482)
