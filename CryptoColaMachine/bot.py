@@ -108,7 +108,6 @@ async def hodl(ctx):
     tenklist = []
 
     noreward = discord.utils.get(server.roles, name="HODL Rewards Exempt")
-    five00 = discord.utils.get(server.roles, name="CAP Holder 500")
     onek = discord.utils.get(server.roles, name="1k CAP Holder")
     fivek = discord.utils.get(server.roles, name="5k CAP Holder")
     tenk = discord.utils.get(server.roles, name="10k CAP God")
@@ -116,18 +115,19 @@ async def hodl(ctx):
     for member in server.members:
         if noreward in member.roles:
             continue
-        elif five00 in member.roles:
-            five00list.append(member.mention)
         elif onek in member.roles:
             oneklist.append(member.mention)
+            continue
         elif fivek in member.roles:
             fiveklist.append(member.mention)
+            continue
         elif tenk in member.roles:
             tenklist.append(member.mention)
+            continue
 
     channel = bot.get_channel(857807635432341504)
     capPrice = 0.0125
-    await channel.send(f"$tip {','.join(five00list)} $0.01802884615 bnb each **500 CAP Holders**")
+    #await channel.send(f"$tip {','.join(five00list)} $0.01802884615 bnb each **500 CAP Holders**")
     await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each **1000 CAP Holders**")
     await channel.send(f"$tip {','.join(fiveklist)} $0.18028846153 bnb each **5000 CAP Holders**")
     await channel.send(f"$tip {','.join(tenklist)} $0.36057692307 bnb each **10000 CAP Holders**")
@@ -149,7 +149,6 @@ async def hodlloop():
     tenklist = []
 
     noreward = discord.utils.get(server.roles, name="HODL Rewards Exempt")
-    five00 = discord.utils.get(server.roles, name="CAP Holder 500")
     onek = discord.utils.get(server.roles, name="1k CAP Holder")
     fivek = discord.utils.get(server.roles, name="5k CAP Holder")
     tenk = discord.utils.get(server.roles, name="10k CAP God")
@@ -157,18 +156,19 @@ async def hodlloop():
     for member in server.members:
         if noreward in member.roles:
             continue
-        elif five00 in member.roles:
-            five00list.append(member.mention)
         elif onek in member.roles:
             oneklist.append(member.mention)
+            continue
         elif fivek in member.roles:
             fiveklist.append(member.mention)
+            continue
         elif tenk in member.roles:
             tenklist.append(member.mention)
+            continue
 
     channel = bot.get_channel(857807635432341504)
     capPrice = 0.0125
-    await channel.send(f"$tip {','.join(five00list)} $0.01802884615 bnb each **500 CAP Holders**")
+    #await channel.send(f"$tip {','.join(five00list)} $0.01802884615 bnb each **500 CAP Holders**")
     await channel.send(f"$tip {','.join(oneklist)} $0.0360576923 bnb each **1000 CAP Holders**")
     await channel.send(f"$tip {','.join(fiveklist)} $0.18028846153 bnb each **5000 CAP Holders**")
     await channel.send(f"$tip {','.join(tenklist)} $0.36057692307 bnb each **10000 CAP Holders**")
