@@ -257,6 +257,16 @@ async def hodlloop():
     
     await channel.send(f"**Thank you for HODLing CAP!**")
 
+@bot.command(name='doge')
+@commands.cooldown(1, 1800, commands.BucketType.user)
+async def claim(ctx, coin):
+    if ctx.guild.id == 854132705212891156:
+        if ctx.channel.id not in [878038814369665034]:
+            return await ctx.send("Go to the proper faucet channel.")
+        if coin.lower() not in ["doge"]:
+            return await ctx.send("This coin is not enabled. To access all coins visit the Crypto Cola Discord.")
+        return await ctx.send(f"$tip {ctx.author.mention} $0.0001 doge **For more rewards, visit the Crypto Cola Discord.**")
+
 @bot.command(name='claim')
 @commands.cooldown(1, 1800, commands.BucketType.user)
 async def claim(ctx, coin):
