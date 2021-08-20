@@ -6,21 +6,21 @@ class cmds(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def bals(ctx, coin="none"):
+    async def bals(self, ctx, coin="none"):
         await ctx.send("$bals top noembed")
 
     @commands.command()
-    async def balances(ctx, coin="none"):
+    async def balances(self, ctx, coin="none"):
         await ctx.send("$bals top noembed")
 
     @commands.command()
-    async def bal(ctx, coin="none"):
+    async def bal(self, ctx, coin="none"):
         if coin != "none":
             return await ctx.send(f"$bal {coin}")
         await ctx.send("You need to include a cryptocurrency code (BTC, ETH, etc.).")
 
     @commands.command()
-    async def balance(ctx, coin="none"):
+    async def balance(self, ctx, coin="none"):
         if coin != "none":
             return await ctx.send(f"$bal {coin}")
         await ctx.send("You need to include a cryptocurrency code (BTC, ETH, etc.).")
@@ -93,7 +93,7 @@ class cmds(commands.Cog):
         return price
 
     @commands.command()
-    async def hodl(ctx):
+    async def hodl(self, ctx):
         if ctx.author.id != 514396597287911425:
             return await ctx.send("Unauthorized usage.")
         server = bot.get_guild(857763612361490482)
@@ -135,7 +135,7 @@ class cmds(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 1800, commands.BucketType.user)
-    async def claim(ctx, coin):
+    async def claim(self, ctx, coin):
         if ctx.guild.id == 854132705212891156:
             if ctx.channel.id not in [878038814369665034]:
                 return await ctx.send("Go to the proper faucet channel.")
@@ -204,7 +204,7 @@ class cmds(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 1800, commands.BucketType.user)
-    async def doge(ctx, coin):
+    async def doge(self, ctx, coin):
         if ctx.guild.id == 854132705212891156:
             if ctx.channel.id not in [878038814369665034]:
                 return await ctx.send("Go to the proper faucet channel.")

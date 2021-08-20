@@ -22,7 +22,7 @@ class Dev(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.has_guild_permissions(manage_guild=True)
-    async def activeloyalconf(ctx, time1, time2, amt1, amt2):
+    async def activeloyalconf(self, ctx, time1, time2, amt1, amt2):
         if ctx.server.id != 857763612361490482:
             return await ctx.send("Can only be used in Crypto Cola server.")
         configs.insert_one({"server":857763612361490482, "type": "activeloyalconf", "time1": time1, "time2": time2, "amt1": amt1, "amt2": amt2})
