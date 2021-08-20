@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Commands(commands.Cog):
+class cmds(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -213,4 +213,4 @@ class Commands(commands.Cog):
             return await ctx.send(f"$tip {ctx.author.mention} $0.0001 doge **For more rewards, visit the Crypto Cola Discord.**")
 
 def setup(bot):
-    bot.add_cog(Commands(bot))
+    bot.add_cog(cmds(bot))

@@ -21,7 +21,7 @@ bot = commands.Bot(command_prefix="f!", intents=discord.Intents.all())
 
 if __name__ == "__main__":
     for extension in [
-        "cogs.commands",
+        "cogs.cmds",
         "cogs.dev"
     ]:
         bot.load_extension(extension)
