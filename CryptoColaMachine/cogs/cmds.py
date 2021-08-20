@@ -1,5 +1,15 @@
+import asyncio
+import os
 import discord
+from dotenv import load_dotenv
+from random import randint, shuffle
 from discord.ext import commands
+from discord.ext import tasks
+import aiohttp
+import pymongo
+import datetime
+from time import gmtime, strftime
+from web3 import Web3
 
 class cmds(commands.Cog):
     def __init__(self, bot):
