@@ -258,7 +258,7 @@ async def hodlloop():
     await channel.send(f"**Thank you for HODLing CAP!**")
 
 @bot.command(name='claim')
-@commands.cooldown(1, 1800, commands.BucketType.user)
+@commands.cooldown(1, 1800, commands.BucketType.channel)
 async def claim(ctx, coin):
     if ctx.guild.id == 854132705212891156:
         if ctx.channel.id not in [878038814369665034]:
