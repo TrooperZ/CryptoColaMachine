@@ -75,12 +75,12 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         if error.retry_after < 1:
             await ctx.send(f"This command is on a `{round(error.retry_after, 2)} second` cooldown, try again later.")
-            await ctx.send(f"If you would like to have a reminder when it's time to claim, visit the $store and purchase the Faucet Ping role.")            
+            await ctx.send(f"If you would like to have a reminder when it's time to claim, visit the $store and purchase the Faucet Ping role (only for Crypto Cola server).")            
             return
 
         fixedRetry = int(error.retry_after)
         await ctx.send(f"This command is on a `{display_time(fixedRetry)}` cooldown, try again later.")
-        await ctx.send(f"If you would like to have a reminder when it's time to claim, visit the $store and purchase the Faucet Ping role.")
+        await ctx.send(f"If you would like to have a reminder when it's time to claim, visit the $store and purchase the Faucet Ping role (only for Crypto Cola server).")
         return
 
 @tasks.loop(hours=2)
