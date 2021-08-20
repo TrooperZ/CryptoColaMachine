@@ -172,49 +172,6 @@ async def loop1():
 
     loop1.change_interval(minutes=dur)
 
-@bot.command(name='hodl')
-async def hodl(ctx):
-    if ctx.author.id != 514396597287911425:
-        return await ctx.send("Unauthorized usage.")
-    server = bot.get_guild(857763612361490482)
-
-    oneklist = []
-    fiveklist = []
-    tenklist = []
-
-    noreward = discord.utils.get(server.roles, name="HODL Rewards Exempt")
-    onek = discord.utils.get(server.roles, name="1k CAP Holder")
-    fivek = discord.utils.get(server.roles, name="5k CAP Holder")
-    tenk = discord.utils.get(server.roles, name="10k CAP God")
-
-    for member in server.members:
-        if noreward in member.roles:
-            continue
-        elif tenk in member.roles:
-            tenklist.append(member.mention)
-            continue
-        elif fivek in member.roles:
-            fiveklist.append(member.mention)
-            continue
-        elif onek in member.roles:
-            oneklist.append(member.mention)
-            continue
-
-
-
-    channel = bot.get_channel(857807635432341504)
-    capPrice = await priceloop()
-    a = capPrice * 1000 * 0.15 / 52
-    b = capPrice * 5000 * 0.15 / 52
-    c = capPrice * 10000 * 0.15 / 52
-    if len(oneklist) != 0:
-        await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
-    if len(fiveklist) != 0:
-        await channel.send(f"$tip {','.join(fiveklist)} ${b} bnb each {fivek.mention}")
-    if len(tenklist) != 0:
-        await channel.send(f"$tip {','.join(tenklist)} ${c} bnb each {tenk.mention}")
-    await channel.send(f"**Thank you for HODLing CAP!**")
-
 @tasks.loop(hours=1)
 async def hodlloop():
     await bot.wait_until_ready()
