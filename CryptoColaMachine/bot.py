@@ -265,7 +265,7 @@ async def claim(ctx, coin):
             return await ctx.send("Go to the proper faucet channel.")
         if coin.lower() not in ["doge"]:
             return await ctx.send("This coin is not enabled. To access all coins visit the Crypto Cola Discord.")
-        return await ctx.send(f"$tip {ctx.author.mention} $0.0001 doge")
+        return await ctx.send(f"$tip {ctx.author.mention} $0.0001 doge **For more rewards, visit the Crypto Cola Discord.**")
 
     if ctx.channel.id not in [864150180169121832, 868183998285885540]:
         return await ctx.send("Go to the faucet channel.")
