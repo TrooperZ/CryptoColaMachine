@@ -19,7 +19,7 @@ class Commands(commands.Cog):
             return await ctx.send(f"$bal {coin}")
         await ctx.send("You need to include a cryptocurrency code (BTC, ETH, etc.).")
 
-    @bot.command(name='balance')
+    @commands.command()
     async def balance(ctx, coin="none"):
         if coin != "none":
             return await ctx.send(f"$bal {coin}")
@@ -92,7 +92,7 @@ class Commands(commands.Cog):
         await channel.edit(name=f"$ {round(price, 5)} CAP")
         return price
 
-    @bot.command(name='hodl')
+    @commands.command()
     async def hodl(ctx):
         if ctx.author.id != 514396597287911425:
             return await ctx.send("Unauthorized usage.")
