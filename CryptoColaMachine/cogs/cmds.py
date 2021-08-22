@@ -156,7 +156,7 @@ class cmds(commands.Cog):
         if ctx.channel.id not in [864150180169121832, 868183998285885540]:
             return await ctx.send("Go to the faucet channel.")
 
-        if coin.lower() not in ['eth', 'ltc', 'bch', 'wax', 'doge', 'vtc', 'ban', 'xmr', 'nano', 'rvn', 'trx', 'xlm', 'xrp', 'lotto', 'pussy', 'etc', '1mt', 'skill', 'comp', 'dai', 'arteon', 'r0ok', 'shx']:
+        if coin.lower() not in ['eth', 'ltc', 'bch', 'wax', 'doge', 'vtc', 'ban', 'xmr', 'nano', 'rvn', 'trx', 'xlm', 'xrp', 'xpr', 'lotto', 'pussy', 'etc', '1mt', 'skill', 'comp', 'dai', 'arteon', 'r0ok', 'shx']:
             return await ctx.send(f"{ctx.author.mention}, invalid coin choice, check pins for valid coins. CAP holders earn BNB weekly.")
 
         admin = discord.utils.get(ctx.guild.roles, name="Administration Team")
