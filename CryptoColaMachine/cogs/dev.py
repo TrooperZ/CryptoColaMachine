@@ -38,5 +38,17 @@ class Dev(commands.Cog):
         configs.insert_one({"server":857763612361490482, "type": "activeloyalconf", "time1": time1, "time2": time2, "amt1": amt1, "amt2": amt2})
         await ctx.send("Configuration set.")
 
+    @commands.command(hidden=True)
+    @commands.has_guild_permissions(manage_guild=True)
+    async def faucetcoins(self, ctx, coin):
+        if ctx.server.id != 857763612361490482:
+            return await ctx.send("Can only be used in Crypto Cola server.")
+        coinlist = []
+        data = configs.find({"$and": [{"server": 857763612361490482, "type": "activeloyalconf"}]})
+        for x in data:
+            coinlist2 = x["coinlist"]
+        configs.insert_one({"server":857763612361490482, "type": "faucetcoins", "coinlist": coinlist})
+        await ctx.send("Configuration set.")
+
 def setup(bot):
     bot.add_cog(Dev(bot))

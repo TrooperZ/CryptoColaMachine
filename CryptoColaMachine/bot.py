@@ -175,11 +175,11 @@ async def loop1():
 @tasks.loop(hours=1)
 async def hodlloop():
     await bot.wait_until_ready()
-    if strftime("%H:%M:%S", gmtime()) != "12:00:00":
-        return
-
     if datetime.datetime.today().weekday() != 4:
         return
+    if datetime.datetime.now().hour != 12:
+        return
+
     server = bot.get_guild(857763612361490482)
 
     oneklist = []
