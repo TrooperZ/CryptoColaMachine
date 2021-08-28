@@ -216,12 +216,16 @@ async def hodlloop():
     d = capPrice * 25000 * 0.15 / 52
     if len(oneklist) != 0:
         await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
+        await asyncio.sleep(5)
     if len(fiveklist) != 0:
         await channel.send(f"$tip {','.join(fiveklist)} ${b} bnb each {fivek.mention}")
+        await asyncio.sleep(5)
     if len(tenklist) != 0:
         await channel.send(f"$tip {','.join(tenklist)} ${c} bnb each {tenk.mention}")
-    if len(tenklist) != 0:
+        await asyncio.sleep(5)
+    if len(tfklist) != 0:
         await channel.send(f"$tip {','.join(tenklist)} ${d} bnb each {tfk.mention}")
+        await asyncio.sleep(5)
 
     await channel.send(f"**Thank you for HODLing CAP!**")
 
