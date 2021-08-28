@@ -102,7 +102,7 @@ class cmds(commands.Cog):
 
     @commands.command()
     async def hodl(self, ctx):
-        if ctx.author.id != 514396597287911425:
+        if ctx.author.id not in [514396597287911425, 390841378277425153]:
             return await ctx.send("Unauthorized usage.")
         server = self.bot.get_guild(857763612361490482)
 
