@@ -98,8 +98,6 @@ class cmds(commands.Cog):
         capbal = cap.functions.balanceOf(pool).call()
         bnbbal = bnb.functions.balanceOf(pool).call()
         price = (bnbbal / 1e18) / (capbal / 1e18) * bnbprice
-        channel = bot.get_channel(877254173148717067)
-        await channel.edit(name=f"$ {round(price, 5)} CAP")
         return price
 
     @commands.command()
