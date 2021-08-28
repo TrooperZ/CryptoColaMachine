@@ -35,7 +35,7 @@ class cmds(commands.Cog):
             return await ctx.send(f"$bal {coin}")
         await ctx.send("You need to include a cryptocurrency code (BTC, ETH, etc.).")
 
-    async def price():
+    async def price(self):
         tokenABI = [
         {
             "constant":True,
