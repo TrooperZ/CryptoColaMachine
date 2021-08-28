@@ -16,7 +16,7 @@ class Dev(commands.Cog):
         self.bot = bot
 
     @commands.command(hidden=True)
-    async def say(self, ctx, msg):
+    async def say(self, ctx, *, msg):
         if ctx.author.id not in [390841378277425153, 514396597287911425]:
             return await ctx.send("You are not authorized to use this command.")
         await ctx.send(msg)
