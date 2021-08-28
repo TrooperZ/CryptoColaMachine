@@ -135,7 +135,7 @@ class cmds(commands.Cog):
                 continue
 
         channel = self.bot.get_channel(857807635432341504)
-        capPrice = await price()
+        capPrice = await self.price()
         a = capPrice * 1000 * 0.15 / 52
         b = capPrice * 5000 * 0.15 / 52
         c = capPrice * 10000 * 0.15 / 52
