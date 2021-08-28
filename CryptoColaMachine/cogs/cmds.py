@@ -106,20 +106,24 @@ class cmds(commands.Cog):
     async def hodl(self, ctx):
         if ctx.author.id != 514396597287911425:
             return await ctx.send("Unauthorized usage.")
-        server = bot.get_guild(857763612361490482)
+        server = self.bot.get_guild(857763612361490482)
 
         oneklist = []
         fiveklist = []
         tenklist = []
+        tfklist = []
 
         noreward = discord.utils.get(server.roles, name="HODL Rewards Exempt")
         onek = discord.utils.get(server.roles, name="1k CAP Holder")
         fivek = discord.utils.get(server.roles, name="5k CAP Holder")
         tenk = discord.utils.get(server.roles, name="10k CAP God")
+        tfk = discord.utils.get(server.roles, name="25k CAP God")
 
         for member in server.members:
             if noreward in member.roles:
                 continue
+            elif tfk in member.roles:
+                tfk.append(member.mention)
             elif tenk in member.roles:
                 tenklist.append(member.mention)
                 continue
@@ -130,17 +134,21 @@ class cmds(commands.Cog):
                 oneklist.append(member.mention)
                 continue
 
-        channel = bot.get_channel(857807635432341504)
+        channel = self.bot.get_channel(857807635432341504)
         capPrice = await price()
         a = capPrice * 1000 * 0.15 / 52
         b = capPrice * 5000 * 0.15 / 52
         c = capPrice * 10000 * 0.15 / 52
+        d = capPrice * 25000 * 0.15 / 52
         if len(oneklist) != 0:
             await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
         if len(fiveklist) != 0:
             await channel.send(f"$tip {','.join(fiveklist)} ${b} bnb each {fivek.mention}")
         if len(tenklist) != 0:
             await channel.send(f"$tip {','.join(tenklist)} ${c} bnb each {tenk.mention}")
+        if len(tenklist) != 0:
+            await channel.send(f"$tip {','.join(tenklist)} ${d} bnb each {tfk.mention}")
+
         await channel.send(f"**Thank you for HODLing CAP!**")
 
     @commands.command()

@@ -185,15 +185,19 @@ async def hodlloop():
     oneklist = []
     fiveklist = []
     tenklist = []
+    tfklist = []
 
     noreward = discord.utils.get(server.roles, name="HODL Rewards Exempt")
     onek = discord.utils.get(server.roles, name="1k CAP Holder")
     fivek = discord.utils.get(server.roles, name="5k CAP Holder")
     tenk = discord.utils.get(server.roles, name="10k CAP God")
+    tfk = discord.utils.get(server.roles, name="25k CAP God")
 
     for member in server.members:
         if noreward in member.roles:
             continue
+        elif tfk in member.roles:
+            tfklist.append(member.mention)
         elif tenk in member.roles:
             tenklist.append(member.mention)
             continue
@@ -209,16 +213,17 @@ async def hodlloop():
     a = capPrice * 1000 * 0.15 / 52
     b = capPrice * 5000 * 0.15 / 52
     c = capPrice * 10000 * 0.15 / 52
+    d = capPrice * 25000 * 0.15 / 52
     if len(oneklist) != 0:
         await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
     if len(fiveklist) != 0:
         await channel.send(f"$tip {','.join(fiveklist)} ${b} bnb each {fivek.mention}")
     if len(tenklist) != 0:
         await channel.send(f"$tip {','.join(tenklist)} ${c} bnb each {tenk.mention}")
-    
-    
-    await channel.send(f"**Thank you for HODLing CAP!**")
+    if len(tenklist) != 0:
+        await channel.send(f"$tip {','.join(tenklist)} ${d} bnb each {tfk.mention}")
 
+    await channel.send(f"**Thank you for HODLing CAP!**")
 
 
 bot.run(os.getenv("DISCORD_TOKEN"))
