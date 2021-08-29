@@ -11,10 +11,6 @@ import datetime
 from time import gmtime, strftime
 from web3 import Web3
 
-mongoclient = pymongo.MongoClient(os.getenv("MONGODB"))
-mongodb = mongoclient["data"]
-configs = mongodb["configs"]
-
 class cmds(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -171,13 +167,7 @@ class cmds(commands.Cog):
         if ctx.channel.id not in [864150180169121832, 868183998285885540]:
             return await ctx.send("Go to the faucet channel.")
 
-        coinlist = []
-
-        data = configs.find({"$and": [{"server": 857763612361490482, "type": "faucetcoins"}]})
-        for x in data:
-            coinlist.extend(x["coinlist"])
-            
-        if coin.lower() not in coinlist:
+        if coin.lower() not in ['eth', 'ltc', 'bch', 'wax', 'doge', 'vtc', 'ban', 'xmr', 'nano', 'rvn', 'trx', 'xlm', 'xrp', 'xpr', 'lotto', 'pussy', 'etc', '1mt', 'skill', 'comp', 'dai', 'arteon', 'r0ok', 'shx']:
             return await ctx.send(f"{ctx.author.mention}, invalid coin choice, check pins for valid coins. CAP holders earn BNB weekly.")
 
         admin = discord.utils.get(ctx.guild.roles, name="Administration Team")
