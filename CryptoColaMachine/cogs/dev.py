@@ -44,9 +44,10 @@ class Dev(commands.Cog):
         if ctx.server.id != 857763612361490482:
             return await ctx.send("Can only be used in Crypto Cola server.")
         coinlist = []
-        data = configs.find({"$and": [{"server": 857763612361490482, "type": "activeloyalconf"}]})
+        data = configs.find({"$and": [{"server": 857763612361490482, "type": "faucetcoins"}]})
         for x in data:
-            coinlist2 = x["coinlist"]
+            coinlist.extend(x["coinlist"])
+        coinlist.append(coin.lower())
         configs.insert_one({"server":857763612361490482, "type": "faucetcoins", "coinlist": coinlist})
         await ctx.send("Configuration set.")
 
