@@ -11,6 +11,10 @@ import datetime
 from time import gmtime, strftime
 from web3 import Web3
 
+mongoclient = pymongo.MongoClient(os.getenv("MONGODB"))
+mongodb = mongoclient["data"]
+configs = mongodb["configs"]
+
 class Dev(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -33,7 +37,7 @@ class Dev(commands.Cog):
     @commands.command(hidden=True)
     @commands.has_guild_permissions(manage_guild=True)
     async def activeloyalconf(self, ctx, time1, time2, amt1, amt2):
-        if ctx.server.id != 857763612361490482:
+        if ctx.guild.id != 857763612361490482:
             return await ctx.send("Can only be used in Crypto Cola server.")
         configs.insert_one({"server":857763612361490482, "type": "activeloyalconf", "time1": time1, "time2": time2, "amt1": amt1, "amt2": amt2})
         await ctx.send("Configuration set.")
@@ -41,7 +45,7 @@ class Dev(commands.Cog):
     @commands.command(hidden=True)
     @commands.has_guild_permissions(manage_guild=True)
     async def faucetcoins(self, ctx, coin):
-        if ctx.server.id != 857763612361490482:
+        if ctx.guild.id != 857763612361490482:
             return await ctx.send("Can only be used in Crypto Cola server.")
         coinlist = []
         data = configs.find({"$and": [{"server": 857763612361490482, "type": "faucetcoins"}]})

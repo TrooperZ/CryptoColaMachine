@@ -11,6 +11,10 @@ import datetime
 from time import gmtime, strftime
 from web3 import Web3
 
+mongoclient = pymongo.MongoClient(os.getenv("MONGODB"))
+mongodb = mongoclient["data"]
+configs = mongodb["configs"]
+
 class cmds(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
