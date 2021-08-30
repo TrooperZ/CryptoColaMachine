@@ -135,10 +135,10 @@ class cmds(commands.Cog):
 
         channel = self.bot.get_channel(857807635432341504)
         capPrice = await self.price()
-        a = capPrice * 1000 * 0.15 / 52
-        b = capPrice * 5000 * 0.15 / 52
-        c = capPrice * 10000 * 0.15 / 52
-        d = capPrice * 25000 * 0.15 / 52
+        a = capPrice * 1000 * 0.12 / 52
+        b = capPrice * 5000 * 0.12 / 52
+        c = capPrice * 10000 * 0.12 / 52
+        d = capPrice * 25000 * 0.12 / 52
         if len(oneklist) != 0:
             await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
             await asyncio.sleep(5)
@@ -232,6 +232,16 @@ class cmds(commands.Cog):
             if coin.lower() not in ["doge"]:
                 return await ctx.send("This coin is not enabled. To access all coins visit the Crypto Cola Discord.")
             return await ctx.send(f"$tip {ctx.author.mention} $0.0001 doge **For more rewards, visit the Crypto Cola Discord.**")
+
+    @commands.command()
+    @commands.cooldown(1, 1800, commands.BucketType.user)
+    async def banana(self, ctx, coin):
+        if ctx.guild.id == 850842415345434636:
+            if ctx.channel.id not in [881895242238939177]:
+                return await ctx.send("Go to the proper faucet channel.")
+            if coin.lower() not in ["banana"]:
+                return await ctx.send("This coin is not enabled. To access all coins visit the Crypto Cola Discord.")
+            return await ctx.send(f"$tip {ctx.author.mention} $0.0001 banana **For more rewards, visit the Crypto Cola Discord.**")
 
 def setup(bot):
     bot.add_cog(cmds(bot))

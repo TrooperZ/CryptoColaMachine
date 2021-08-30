@@ -210,10 +210,10 @@ async def hodlloop():
 
     channel = bot.get_channel(857807635432341504)
     capPrice = await priceloop()
-    a = capPrice * 1000 * 0.15 / 52
-    b = capPrice * 5000 * 0.15 / 52
-    c = capPrice * 10000 * 0.15 / 52
-    d = capPrice * 25000 * 0.15 / 52
+    a = capPrice * 1000 * 0.12 / 52
+    b = capPrice * 5000 * 0.12 / 52
+    c = capPrice * 10000 * 0.12 / 52
+    d = capPrice * 25000 * 0.12 / 52
     if len(oneklist) != 0:
         await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
         await asyncio.sleep(5)
