@@ -235,12 +235,10 @@ class cmds(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 1800, commands.BucketType.user)
-    async def banana(self, ctx, coin):
+    async def banana(self, ctx):
         if ctx.guild.id == 850842415345434636:
             if ctx.channel.id not in [881895242238939177]:
                 return await ctx.send("Go to the proper faucet channel.")
-            if coin.lower() not in ["banana"]:
-                return await ctx.send("This coin is not enabled. To access all coins visit the Crypto Cola Discord.")
             return await ctx.send(f"$tip {ctx.author.mention} $0.0001 banana **For more rewards, visit the Crypto Cola Discord.**")
 
 def setup(bot):
