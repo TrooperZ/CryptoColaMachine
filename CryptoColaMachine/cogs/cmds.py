@@ -109,6 +109,7 @@ class cmds(commands.Cog):
         oneklist = []
         fiveklist = []
         tenklist = []
+        lplist
         tfklist = []
 
         noreward = discord.utils.get(server.roles, name="HODL Rewards Exempt")
@@ -116,6 +117,11 @@ class cmds(commands.Cog):
         fivek = discord.utils.get(server.roles, name="5k CAP Holder")
         tenk = discord.utils.get(server.roles, name="10k CAP God")
         tfk = discord.utils.get(server.roles, name="25k CAP God")
+        lp = discord.utils.get(server.roles, name="LP Investor")
+
+        for member in server.members:
+            if lp in member.roles:
+                lplist.append(member.mention)
 
         for member in server.members:
             if noreward in member.roles:
@@ -135,10 +141,10 @@ class cmds(commands.Cog):
 
         channel = self.bot.get_channel(857807635432341504)
         capPrice = await self.price()
-        a = capPrice * 1000 * 0.12 / 52
-        b = capPrice * 5000 * 0.12 / 52
-        c = capPrice * 10000 * 0.12 / 52
-        d = capPrice * 25000 * 0.12 / 52
+        a = capPrice * 1000 * 0.15 / 52
+        b = capPrice * 5000 * 0.15 / 52
+        c = capPrice * 10000 * 0.15 / 52
+        d = capPrice * 25000 * 0.15 / 52
         if len(oneklist) != 0:
             await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
             await asyncio.sleep(5)
@@ -150,6 +156,9 @@ class cmds(commands.Cog):
             await asyncio.sleep(5)
         if len(tfklist) != 0:
             await channel.send(f"$tip {','.join(tenklist)} ${d} bnb each {tfk.mention}")
+            await asyncio.sleep(5)
+        if len(lplist) != 0:
+            await channel.send(f"$tip {','.join(lplist)} $0.5 bnb each {lp.mention}")
             await asyncio.sleep(5)
 
         await channel.send(f"**Thank you for HODLing CAP!**")
@@ -231,7 +240,7 @@ class cmds(commands.Cog):
                 return await ctx.send("Go to the proper faucet channel.")
             if coin.lower() not in ["doge"]:
                 return await ctx.send("This coin is not enabled. To access all coins visit the Crypto Cola Discord.")
-            return await ctx.send(f"$tip {ctx.author.mention} $0.0001 doge **For more rewards, visit the Crypto Cola Discord.**")
+            return await ctx.send(f"$tip {ctx.author.mention} $0.0001 doge **For more rewards, visit the Crypto Cola Discord (discord.gg/kQfqgw5NUU).**")
 
     @commands.command()
     @commands.cooldown(1, 1800, commands.BucketType.user)
@@ -239,7 +248,7 @@ class cmds(commands.Cog):
         if ctx.guild.id == 850842415345434636:
             if ctx.channel.id not in [881895242238939177]:
                 return await ctx.send("Go to the proper faucet channel.")
-            return await ctx.send(f"$tip {ctx.author.mention} $0.0001 banana **For more rewards, visit the Crypto Cola Discord.**")
+            return await ctx.send(f"$tip {ctx.author.mention} $0.0001 banana **For more rewards, visit the Crypto Cola Discord (discord.gg/kQfqgw5NUU).**")
 
 def setup(bot):
     bot.add_cog(cmds(bot))

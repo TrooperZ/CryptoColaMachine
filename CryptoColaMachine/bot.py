@@ -30,6 +30,7 @@ if __name__ == "__main__":
 async def on_ready():
     hodlloop.start()
     loop1.start()
+    driploop.start()
     priceloop.start()
     print("Bot is online.")
 
@@ -172,6 +173,17 @@ async def loop1():
 
     loop1.change_interval(minutes=dur)
 
+@tasks.loop(minutes=1)
+async def driploop():
+    await bot.wait_until_ready()
+    dur = randint(1, 3)
+    amt = randint (1, 20)
+    amt = amt * 0.0001
+    channel = bot.get_channel(882428410134147162)
+    await channel.send(f"$airdrop ${amt} wax {(dur//2)*60}s")
+    driploop.change_interval(minutes=dur)
+
+
 @tasks.loop(hours=1)
 async def hodlloop():
     await bot.wait_until_ready()
@@ -210,10 +222,10 @@ async def hodlloop():
 
     channel = bot.get_channel(857807635432341504)
     capPrice = await priceloop()
-    a = capPrice * 1000 * 0.12 / 52
-    b = capPrice * 5000 * 0.12 / 52
-    c = capPrice * 10000 * 0.12 / 52
-    d = capPrice * 25000 * 0.12 / 52
+    a = capPrice * 1000 * 0.15 / 52
+    b = capPrice * 5000 * 0.15 / 52
+    c = capPrice * 10000 * 0.15 / 52
+    d = capPrice * 25000 * 0.15 / 52
     if len(oneklist) != 0:
         await channel.send(f"$tip {','.join(oneklist)} ${a} bnb each {onek.mention}")
         await asyncio.sleep(5)

@@ -38,6 +38,10 @@ class Dev(commands.Cog):
         configs.insert_one({"server":857763612361490482, "type": "activeloyalconf", "time1": time1, "time2": time2, "amt1": amt1, "amt2": amt2})
         await ctx.send("Configuration set.")
 
+    @commands.command(hidden=True)
+    @commands.has_guild_permissions(view_audit_log=True)
+    async def shiller(self, ctx, user):
+        await ctx.send(f"$store gift {user.mention} shiller")
 
 def setup(bot):
     bot.add_cog(Dev(bot))
