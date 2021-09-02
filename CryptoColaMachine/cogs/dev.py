@@ -40,7 +40,7 @@ class Dev(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.has_guild_permissions(view_audit_log=True)
-    async def shiller(self, ctx, user):
+    async def shiller(self, ctx, user: discord.User):
         await ctx.send(f"$store gift {user.mention} shiller")
 
 def setup(bot):
