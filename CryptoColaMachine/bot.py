@@ -176,13 +176,12 @@ async def loop1():
 @tasks.loop(minutes=1)
 async def driploop():
     await bot.wait_until_ready()
-    dur = randint(1, 3)
-    dur2 = randint(8, 10)
+    dur = randint(1, 5)
     amt = randint (1, 15)
-    amt = amt * 0.0001
+    amt = int(amt) * 0.0001
     channel = bot.get_channel(882428410134147162)
-    await channel.send(f"$airdrop ${amt} bnb {dur}m")
-    driploop.change_interval(minutes=dur2)
+    await channel.send(f"$airdrop ${round(amt, 6)} bnb")
+    driploop.change_interval(minutes=dur)
 
 
 @tasks.loop(hours=1)

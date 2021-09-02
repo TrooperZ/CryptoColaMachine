@@ -39,8 +39,10 @@ class Dev(commands.Cog):
         await ctx.send("Configuration set.")
 
     @commands.command(hidden=True)
-    @commands.has_guild_permissions(view_audit_log=True)
     async def shiller(self, ctx, user: discord.User):
+        team = discord.utils.get(ctx.guild.roles, name="Crypto Cola Team")
+        if team not in ctx.member.roles:
+            return
         await ctx.send(f"$store gift {user.mention} shiller")
 
 def setup(bot):
