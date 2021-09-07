@@ -41,7 +41,7 @@ class Dev(commands.Cog):
     @commands.command(hidden=True)
     async def shiller(self, ctx, user: discord.User):
         team = discord.utils.get(ctx.guild.roles, name="Crypto Cola Team")
-        if team not in ctx.member.roles:
+        if team not in ctx.author.roles:
             return
         await ctx.send(f"$store gift {user.mention} shiller")
 
