@@ -37,7 +37,7 @@ async def on_ready():
 @bot.event
 async def on_reaction_add(reaction, user):
     if reaction.emoji == "🎉":
-        if message.channel.id in [864187144331198475]:
+        if reaction.message.channel.id in [864187144331198475]:
             return        
         if reaction.message.author.id == 617037497574359050:
             await asyncio.sleep(10)
