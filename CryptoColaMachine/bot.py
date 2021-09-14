@@ -35,6 +35,16 @@ async def on_ready():
     print("Bot is online.")
 
 @bot.event
+async def on_reaction_add(reaction, user):
+    if reaction.emoji == "🎉":
+        if reaction.message.channel.id in [864187144331198475]:
+            return        
+        if reaction.message.author.id == 617037497574359050:
+            await asyncio.sleep(10)
+            await reaction.message.add_reaction("🎉")
+        
+    
+@bot.event
 async def on_message(message):
     if message.channel.id in [857808852258783293]:
         if message.author.id not in [617037497574359050, 514396597287911425, 449995475303530507, 663393254284328973, 213967602911936512, 390841378277425153, 167397531196719116, 381927133334863872, 868157426199838720]:
