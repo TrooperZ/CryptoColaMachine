@@ -16,8 +16,8 @@ class cmds(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def bals(self, ctx, coin="none"):
-        await ctx.send("$bals top noembed")
+    async def bals(self, ctx, *, coin="top noembed"):
+        await ctx.send("$bals {coin}")
 
     @commands.command()
     async def balances(self, ctx, coin="none"):
